@@ -1,7 +1,5 @@
 fastapi
-flask
-flask-cors
+uvicorn
+joblib
 pandas
-numpy
 scikit-learn
-gunicorn
