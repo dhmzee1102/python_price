@@ -12,8 +12,6 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
 # ---------------------------------------------------------------
 
-from train_price_model import train_model
-
 app = FastAPI()
 
 app.add_middleware(
@@ -134,16 +132,4 @@ def predict_price(request: PredictionRequest):
         # Print stack trace to console to help debugging if this happens again
         import traceback
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/train")
-def trigger_training():
-    try:
-        result = train_model()
-        if result['status'] == 'success':
-            load_artifacts()
-            return result
-        else:
-            raise HTTPException(status_code=500, detail=result['message'])
-    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
